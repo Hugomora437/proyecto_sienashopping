@@ -1,0 +1,712 @@
+<!doctype html>
+
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      name="viewport"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "secondary-fixed": "#6bff8f",
+              "on-tertiary-container": "#ffc988",
+              "on-tertiary": "#ffffff",
+              "primary-fixed-dim": "#b2c5ff",
+              "secondary-container": "#6bff8f",
+              "on-primary-fixed-variant": "#0040a2",
+              "surface-container-highest": "#d3e4fe",
+              "on-error-container": "#93000a",
+              "surface-container": "#e5eeff",
+              "inverse-on-surface": "#eaf1ff",
+              "on-background": "#0b1c30",
+              "surface-dim": "#cbdbf5",
+              "surface-container-low": "#eff4ff",
+              "secondary-fixed-dim": "#4ae176",
+              "on-secondary-fixed-variant": "#005321",
+              "on-secondary-fixed": "#002109",
+              "primary-fixed": "#dae2ff",
+              "primary-container": "#0052cc",
+              "on-primary-fixed": "#001848",
+              primary: "#003d9b",
+              background: "#f8f9ff",
+              "tertiary-fixed": "#ffddb8",
+              "on-tertiary-fixed": "#2a1700",
+              secondary: "#006e2f",
+              "on-primary": "#ffffff",
+              "on-tertiary-fixed-variant": "#653e00",
+              outline: "#737685",
+              "surface-variant": "#d3e4fe",
+              "on-primary-container": "#c4d2ff",
+              "on-surface-variant": "#434654",
+              "surface-container-lowest": "#ffffff",
+              error: "#ba1a1a",
+              "outline-variant": "#c3c6d6",
+              surface: "#f8f9ff",
+              "inverse-primary": "#b2c5ff",
+              "surface-container-high": "#dce9ff",
+              "on-secondary-container": "#007432",
+              "on-secondary": "#ffffff",
+              tertiary: "#603b00",
+              "inverse-surface": "#213145",
+              "surface-tint": "#0c56d0",
+              "surface-bright": "#f8f9ff",
+              "tertiary-container": "#805000",
+              "error-container": "#ffdad6",
+              "tertiary-fixed-dim": "#ffb95f",
+              "on-surface": "#0b1c30",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              base: "8px",
+              xl: "32px",
+              sm: "12px",
+              md: "16px",
+              xs: "4px",
+              "touch-target": "44px",
+              lg: "24px",
+            },
+            fontFamily: {
+              "headline-lg-mobile": ["Inter"],
+              "data-tabular": ["Inter"],
+              "label-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "headline-md": ["Inter"],
+              "body-lg": ["Inter"],
+            },
+            fontSize: {
+              "headline-lg-mobile": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "data-tabular": [
+                "14px",
+                { lineHeight: "20px", fontWeight: "500" },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "headline-md": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .cart-animation-pop {
+        animation: pop 0.3s ease-out;
+      }
+      @keyframes pop {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+    <style>
+      body {
+        min-height: max(884px, 100dvh);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-on-background font-body-md min-h-screen pb-32"
+  >
+    <!-- Top App Bar -->
+    <header
+      class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-md h-touch-target bg-surface-container-low dark:bg-surface-container-high shadow-sm"
+    >
+      <div class="flex items-center gap-base">
+        <button
+          class="material-symbols-outlined text-primary dark:text-inverse-primary p-xs active:opacity-80 transition-opacity"
+        >
+          menu
+        </button>
+        <h1
+          class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim"
+        >
+          POS Pro
+        </h1>
+      </div>
+      <div class="flex items-center gap-sm">
+        <div class="relative">
+          <span
+            class="material-symbols-outlined text-on-surface-variant dark:text-outline-variant p-xs active:opacity-80 transition-opacity"
+            >notifications</span
+          >
+          <span
+            class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"
+          ></span>
+        </div>
+        <div
+          class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant"
+        >
+          <img
+            class="w-full h-full object-cover"
+            data-alt="A professional headshot of a retail manager for a modern corporate POS system avatar. The lighting is soft and neutral, shot against a clean, light-colored background that emphasizes a professional and reliable tone. The overall aesthetic is minimalist and high-quality, fitting a clean corporate software interface."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgZcxDTIuD4s5tQToAgdlsWXyulls3_TwXdRBV5rxIDIF6XAhSfetuu9FnwTRHq2TpmFZwn-NoSD3q1QcYLbYlqR2fIbw6Ict8a8GVZ2MNoEczkqoXSWwVf3qHyHqdRprb06o7gMcIeI1hNpLg1RpiZNOe8X4vuet61ucwbNfq6Vy6JOi_DJJ-BQNJKzoV0MNZqKXcM0G5gf_V3LQhfUM9ms-RgsOnFnZGJGCaOGFEHXPdAXb_j51Ivx-v303LyJAdFTPbXsNvvEQu"
+          />
+        </div>
+      </div>
+    </header>
+    <!-- Main Content Area -->
+    <main class="pt-16 px-md max-w-7xl mx-auto">
+      <!-- Search & Filter Row -->
+      <section class="mt-lg mb-lg">
+        <div class="flex flex-col md:flex-row gap-base">
+          <div class="relative flex-1">
+            <span
+              class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline"
+              >search</span
+            >
+            <input
+              class="w-full h-12 pl-12 pr-4 bg-surface-container-lowest border border-outline-variant rounded-xl focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-md outline-none"
+              placeholder="Buscar productos por nombre o SKU..."
+              type="text"
+            />
+          </div>
+          <button
+            class="flex items-center justify-center gap-xs px-lg py-sm bg-surface-container-highest text-on-surface-variant rounded-xl font-label-md hover:bg-surface-variant transition-colors border border-outline-variant"
+          >
+            <span class="material-symbols-outlined">filter_list</span>
+            Categorías
+          </button>
+        </div>
+      </section>
+      <!-- Product Grid -->
+      <section
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-md"
+      >
+        <!-- Product Card 1 -->
+        <div
+          class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col product-card"
+          data-name="Smartphone X1"
+          data-price="799.00"
+          data-product-id="1"
+        >
+          <div class="h-48 relative overflow-hidden">
+            <img
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              data-alt="High-quality commercial product photograph of a modern, sleek black smartphone featuring a large edge-to-edge screen. The device is placed on a minimalist white surface with soft ambient lighting creating subtle reflections. The mood is premium, tech-focused, and clean, aligning with a corporate professional retail catalog."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-ol_TVju0Hwy9bkDt7c1q--TN_SVdhWxJrFUPxPfDg89MhR7oKhoxhCUfl3LDG8-idHd6NTaw4zvjdLvF_V898tnIdjomRpzmXcWBrZYPDXk3IyCk_AaLnXoq1NzqBozDCUGLTWkVz8_61Z4XP3aWrPVRjBJVo47vljiHuMfRzcarUsgIr6n8244oTEATGIT6xE1hOAFa9fTT5_jM-CqoFCB9QusIVcahNwjgNdyVrQy-PDkxAI2ZoOr6J2MChxqMrhNQg35ey2ZB"
+            />
+            <span
+              class="absolute top-2 right-2 px-base py-xs bg-secondary-container text-on-secondary-container text-label-md rounded-full"
+              >En Stock</span
+            >
+          </div>
+          <div class="p-md flex flex-col flex-1">
+            <div class="flex justify-between items-start mb-xs">
+              <h3 class="font-headline-md text-headline-md text-on-surface">
+                Smartphone X1
+              </h3>
+              <span class="text-primary font-bold">$799.00</span>
+            </div>
+            <p class="text-body-md text-on-surface-variant line-clamp-2 mb-md">
+              Cámara pro-grade y batería de 5000mAh para uso rudo.
+            </p>
+            <div class="mt-auto">
+              <button
+                class="w-full h-12 bg-primary text-on-primary rounded-xl flex items-center justify-center gap-base font-label-md active:scale-95 transition-transform"
+                onclick="addToCart(1)"
+              >
+                <span class="material-symbols-outlined">add_shopping_cart</span>
+                Agregar al Carrito
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Product Card 2 -->
+        <div
+          class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col product-card"
+          data-name="Laptop Slim Pro"
+          data-price="1249.99"
+          data-product-id="2"
+        >
+          <div class="h-48 relative overflow-hidden">
+            <img
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              data-alt="Professional studio shot of a slim, metallic silver laptop on a minimalist wooden desk. The screen shows a vibrant abstract wallpaper. The lighting is bright and clean, emphasizing the thin design and premium build quality. Corporate style with high-end feel for an inventory management system."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQWTUOemfKjruGt-qAZy6ThQWF72NAkqEr-pBybGEeNPFAId-JxQO8VqzruXd3YCJnvK_iqmUN0EmdsElyPcEqsa9_aaC13woz3BwLuHVWXPvYmlkpOr6pnrpGQKgrnU_i7rFETBsd6t_W_8mRS3IE6tj5sef23tWeJ38x6lRpQkIXCQQ2wrA1mEq0pBFLOs6Dv1U8Uk30DUjsinrq23vON91k_Re8W3byq4_Lw63FdLbAATQ_mWju5vFvxO77JdXzVZ9aycColcwe"
+            />
+            <span
+              class="absolute top-2 right-2 px-base py-xs bg-tertiary-fixed text-on-tertiary-fixed text-label-md rounded-full"
+              >Stock Bajo</span
+            >
+          </div>
+          <div class="p-md flex flex-col flex-1">
+            <div class="flex justify-between items-start mb-xs">
+              <h3 class="font-headline-md text-headline-md text-on-surface">
+                Laptop Slim Pro
+              </h3>
+              <span class="text-primary font-bold">$1249.99</span>
+            </div>
+            <p class="text-body-md text-on-surface-variant line-clamp-2 mb-md">
+              Rendimiento extremo con procesador de última generación.
+            </p>
+            <div class="mt-auto">
+              <button
+                class="w-full h-12 bg-primary text-on-primary rounded-xl flex items-center justify-center gap-base font-label-md active:scale-95 transition-transform"
+                onclick="addToCart(2)"
+              >
+                <span class="material-symbols-outlined">add_shopping_cart</span>
+                Agregar al Carrito
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Product Card 3 -->
+        <div
+          class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col product-card"
+          data-name="Auriculares ANC"
+          data-price="199.50"
+          data-product-id="3"
+        >
+          <div class="h-48 relative overflow-hidden">
+            <img
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              data-alt="Elegant over-ear wireless headphones in matte grey, positioned against a minimalist light blue background. Soft side lighting highlights the premium texture and ergonomic design. High-end product photography suitable for a modern electronic catalog, conveying comfort and superior technology."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNLb0cZjYGa6y5eZrLA3k-reEGFd2bMSmlg7BfH2NZOZZZOkRFUKIxSm8Y2gsJ7AAR4GEHa_CYdiYfDTM7P_NajcSs3Nswn1K_cPNy-vxb4pbjJ4Q-Mp9ZC3Me6Q-NPmLf1ZcKxGhleSY72Oh-qBqgt6YO44-u5nLUY7829m32MbXQPrXQUyF9G3vMVg6IhjYNTNMlDiOwvkyffSpFHM6zDKnDgLM47I1g-xbwZgyj8KG4D1D0CpiXL2u2hfGi7axlYshcwb2Hxi4I"
+            />
+            <span
+              class="absolute top-2 right-2 px-base py-xs bg-secondary-container text-on-secondary-container text-label-md rounded-full"
+              >En Stock</span
+            >
+          </div>
+          <div class="p-md flex flex-col flex-1">
+            <div class="flex justify-between items-start mb-xs">
+              <h3 class="font-headline-md text-headline-md text-on-surface">
+                Auriculares ANC
+              </h3>
+              <span class="text-primary font-bold">$199.50</span>
+            </div>
+            <p class="text-body-md text-on-surface-variant line-clamp-2 mb-md">
+              Cancelación activa de ruido líder en la industria.
+            </p>
+            <div class="mt-auto">
+              <button
+                class="w-full h-12 bg-primary text-on-primary rounded-xl flex items-center justify-center gap-base font-label-md active:scale-95 transition-transform"
+                onclick="addToCart(3)"
+              >
+                <span class="material-symbols-outlined">add_shopping_cart</span>
+                Agregar al Carrito
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Product Card 4 -->
+        <div
+          class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col product-card"
+          data-name="Smartwatch V2"
+          data-price="349.00"
+          data-product-id="4"
+        >
+          <div class="h-48 relative overflow-hidden">
+            <img
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              data-alt="A sophisticated smartwatch with a minimalist round face and a premium silicone strap, displayed on a clean grey marble surface. High-key lighting highlights the sharp digital display and sleek metal casing. The aesthetic is modern, professional, and lifestyle-oriented for a tech inventory interface."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx9PueLZfMrONp4ocV5au3kA-e7_OwIOEprXz6xFYedXrEWebqPS8uqEAiN20A9Vn-8a7KcHGn5P5mUBTrJgnwkCaByX9z7vX4RIlTvrEhL7DsLO_8O9ptgy9jqitAHpAsszsigAdnr7qXncg5BfjzMu5s6jf_Wyaw43_v07D1Brgx0nCAQmAQZpjHIFXytbMQHyytLI_q9ckFLwnDLj3Tlec3ShgSBS5A4QiBxSvAGXDmuuFyfm0Vg31eBtBJtoCaC4plnlYvFcCE"
+            />
+            <span
+              class="absolute top-2 right-2 px-base py-xs bg-error-container text-on-error-container text-label-md rounded-full"
+              >Sin Stock</span
+            >
+          </div>
+          <div class="p-md flex flex-col flex-1">
+            <div class="flex justify-between items-start mb-xs">
+              <h3 class="font-headline-md text-headline-md text-on-surface">
+                Smartwatch V2
+              </h3>
+              <span class="text-primary font-bold">$349.00</span>
+            </div>
+            <p class="text-body-md text-on-surface-variant line-clamp-2 mb-md">
+              Monitoreo de salud avanzado y GPS integrado.
+            </p>
+            <div class="mt-auto">
+              <button
+                class="w-full h-12 bg-outline-variant text-on-surface-variant rounded-xl flex items-center justify-center gap-base font-label-md cursor-not-allowed"
+                disabled=""
+              >
+                <span class="material-symbols-outlined">block</span>
+                Sin Inventario
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Cart Bar (Sticky Bottom) -->
+    <div
+      class="fixed bottom-16 left-0 w-full z-40 bg-surface-container shadow-[0_-4px_12px_rgba(0,0,0,0.05)] border-t border-outline-variant px-md py-base hidden transition-all duration-300 transform translate-y-full md:translate-y-0"
+      id="cart-summary-bar"
+    >
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-md">
+          <div
+            class="relative bg-primary-container p-sm rounded-xl"
+            id="cart-icon-container"
+          >
+            <span class="material-symbols-outlined text-on-primary-container"
+              >shopping_cart</span
+            >
+            <span
+              class="absolute -top-2 -right-2 bg-error text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full border-2 border-surface-container font-bold"
+              id="cart-count-badge"
+              >0</span
+            >
+          </div>
+          <div>
+            <p class="text-label-md text-on-surface-variant">Total Parcial</p>
+            <p
+              class="text-headline-md font-bold text-primary"
+              id="cart-total-text"
+            >
+              $0.00
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-base">
+          <button
+            class="h-12 px-lg bg-surface-container-highest text-on-surface-variant font-label-md rounded-xl hover:bg-surface-variant border border-outline-variant transition-colors"
+            onclick="toggleCartModal()"
+          >
+            Ver Detalle
+          </button>
+          <button
+            class="h-12 px-xl bg-secondary text-on-secondary font-label-md rounded-xl shadow-md active:scale-95 transition-all"
+          >
+            Cobrar Venta
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Cart Modal / Slide-out -->
+    <div class="fixed inset-0 z-[60] hidden" id="cart-modal">
+      <div
+        class="absolute inset-0 bg-black/40 backdrop-blur-sm"
+        onclick="toggleCartModal()"
+      ></div>
+      <div
+        class="absolute bottom-0 right-0 w-full md:w-[400px] h-[751px] md:h-full bg-surface-container-lowest shadow-2xl flex flex-col animate-slide-up"
+      >
+        <div
+          class="p-md flex items-center justify-between border-b border-outline-variant"
+        >
+          <div class="flex items-center gap-base">
+            <span class="material-symbols-outlined text-primary"
+              >receipt_long</span
+            >
+            <h2 class="text-headline-md font-bold">Resumen de Venta</h2>
+          </div>
+          <button
+            class="material-symbols-outlined p-xs hover:bg-surface-container rounded-full"
+            onclick="toggleCartModal()"
+          >
+            close
+          </button>
+        </div>
+        <div
+          class="flex-1 overflow-y-auto p-md space-y-md hide-scrollbar"
+          id="cart-items-list"
+        >
+          <!-- Items populated by JS -->
+          <div
+            class="flex flex-col items-center justify-center h-full opacity-50 text-center"
+            id="empty-cart-state"
+          >
+            <span class="material-symbols-outlined text-[64px] mb-base"
+              >shopping_basket</span
+            >
+            <p class="font-headline-md">El carrito está vacío</p>
+            <p class="text-body-md">
+              Agrega productos del catálogo para comenzar.
+            </p>
+          </div>
+        </div>
+        <div class="p-md bg-surface-container-low space-y-md">
+          <div
+            class="flex justify-between items-center text-on-surface-variant"
+          >
+            <span class="text-body-lg">Subtotal</span>
+            <span class="font-data-tabular" id="modal-subtotal">$0.00</span>
+          </div>
+          <div
+            class="flex justify-between items-center text-on-surface-variant"
+          >
+            <span class="text-body-lg">Impuestos (16%)</span>
+            <span class="font-data-tabular" id="modal-tax">$0.00</span>
+          </div>
+          <div
+            class="border-t border-outline-variant pt-md flex justify-between items-center"
+          >
+            <span class="text-headline-md font-bold">Total Final</span>
+            <span
+              class="text-headline-md font-bold text-primary"
+              id="modal-total"
+              >$0.00</span
+            >
+          </div>
+          <button
+            class="w-full h-14 bg-secondary text-on-secondary rounded-xl font-headline-md flex items-center justify-center gap-base active:scale-[0.98] transition-all"
+          >
+            Finalizar Transacción
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Notification Toast -->
+    <div
+      class="fixed top-20 right-4 z-[100] transform translate-x-[150%] transition-transform duration-300 pointer-events-none"
+      id="toast"
+    >
+      <div
+        class="bg-secondary text-white px-lg py-sm rounded-lg shadow-lg flex items-center gap-base"
+      >
+        <span class="material-symbols-outlined">check_circle</span>
+        <span id="toast-message">Producto agregado</span>
+      </div>
+    </div>
+    <!-- Bottom Navigation Bar (Mobile) -->
+    <nav
+      class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-surface dark:bg-surface-dim px-base py-xs min-h-[64px] border-t border-outline-variant dark:border-outline shadow-lg"
+    >
+      <button
+        class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-lg py-xs active:scale-95 transition-transform duration-150"
+      >
+        <span class="material-symbols-outlined">storefront</span>
+        <span class="font-label-md text-label-md">Catálogo</span>
+      </button>
+      <button
+        class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-lg py-xs hover:bg-surface-container dark:hover:bg-surface-container-high active:scale-95 transition-transform duration-150"
+      >
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span class="font-label-md text-label-md">Facturación</span>
+      </button>
+      <button
+        class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-lg py-xs hover:bg-surface-container dark:hover:bg-surface-container-high active:scale-95 transition-transform duration-150"
+      >
+        <span class="material-symbols-outlined">history</span>
+        <span class="font-label-md text-label-md">Historial</span>
+      </button>
+      <button
+        class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-lg py-xs hover:bg-surface-container dark:hover:bg-surface-container-high active:scale-95 transition-transform duration-150"
+      >
+        <span class="material-symbols-outlined">sell</span>
+        <span class="font-label-md text-label-md">Promos</span>
+      </button>
+    </nav>
+    <script>
+      let cart = [];
+      const products = [
+        { id: 1, name: "Smartphone X1", price: 799.0 },
+        { id: 2, name: "Laptop Slim Pro", price: 1249.99 },
+        { id: 3, name: "Auriculares ANC", price: 199.5 },
+        { id: 4, name: "Smartwatch V2", price: 349.0 },
+      ];
+
+      function addToCart(productId) {
+        const product = products.find((p) => p.id === productId);
+        const existingItem = cart.find((item) => item.id === productId);
+
+        if (existingItem) {
+          existingItem.quantity += 1;
+          showToast(`+1 ${product.name} (Actualizado)`);
+          highlightProductCard(productId);
+        } else {
+          cart.push({ ...product, quantity: 1 });
+          showToast(`${product.name} agregado`);
+        }
+
+        updateUI();
+        animateCartIcon();
+      }
+
+      function updateQuantity(productId, delta) {
+        const item = cart.find((i) => i.id === productId);
+        if (item) {
+          item.quantity += delta;
+          if (item.quantity <= 0) {
+            cart = cart.filter((i) => i.id !== productId);
+          }
+          updateUI();
+        }
+      }
+
+      function removeFromCart(productId) {
+        cart = cart.filter((i) => i.id !== productId);
+        updateUI();
+      }
+
+      function updateUI() {
+        const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const subtotal = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0,
+        );
+        const tax = subtotal * 0.16;
+        const total = subtotal + tax;
+
+        // Update Summaries
+        document.getElementById("cart-count-badge").textContent = totalCount;
+        document.getElementById("cart-total-text").textContent =
+          `$${subtotal.toFixed(2)}`;
+        document.getElementById("modal-subtotal").textContent =
+          `$${subtotal.toFixed(2)}`;
+        document.getElementById("modal-tax").textContent = `$${tax.toFixed(2)}`;
+        document.getElementById("modal-total").textContent =
+          `$${total.toFixed(2)}`;
+
+        // Show/Hide Bar
+        const bar = document.getElementById("cart-summary-bar");
+        if (cart.length > 0) {
+          bar.classList.remove("hidden");
+          setTimeout(() => bar.classList.remove("translate-y-full"), 10);
+        } else {
+          bar.classList.add("translate-y-full");
+          setTimeout(() => bar.classList.add("hidden"), 300);
+        }
+
+        renderCartItems();
+      }
+
+      function renderCartItems() {
+        const container = document.getElementById("cart-items-list");
+        const emptyState = document.getElementById("empty-cart-state");
+
+        if (cart.length === 0) {
+          container.innerHTML = "";
+          container.appendChild(emptyState);
+          return;
+        }
+
+        container.innerHTML = cart
+          .map(
+            (item) => `
+                <div class="flex items-center gap-md p-base bg-surface-container-low rounded-xl border border-outline-variant">
+                    <div class="w-16 h-16 rounded-lg bg-surface-container-highest flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-primary">inventory_2</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-body-lg font-bold truncate">${item.name}</h4>
+                        <p class="text-label-md text-on-surface-variant">$${item.price.toFixed(2)} c/u</p>
+                    </div>
+                    <div class="flex flex-col items-end gap-xs">
+                        <div class="flex items-center gap-xs bg-surface-container-highest rounded-full p-xs">
+                            <button onclick="updateQuantity(${item.id}, -1)" class="material-symbols-outlined text-[20px] p-1 hover:bg-outline-variant rounded-full">remove</button>
+                            <span class="w-8 text-center font-bold font-data-tabular">${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)" class="material-symbols-outlined text-[20px] p-1 hover:bg-outline-variant rounded-full">add</button>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="text-error text-label-md font-bold uppercase tracking-wider">Eliminar</button>
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      function toggleCartModal() {
+        const modal = document.getElementById("cart-modal");
+        modal.classList.toggle("hidden");
+        if (!modal.classList.contains("hidden")) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "";
+        }
+      }
+
+      function highlightProductCard(productId) {
+        const card = document.querySelector(
+          `.product-card[data-product-id="${productId}"]`,
+        );
+        if (card) {
+          card.classList.add("ring-2", "ring-primary", "bg-primary-fixed");
+          setTimeout(() => {
+            card.classList.remove("ring-2", "ring-primary", "bg-primary-fixed");
+          }, 800);
+        }
+      }
+
+      function showToast(msg) {
+        const toast = document.getElementById("toast");
+        document.getElementById("toast-message").textContent = msg;
+        toast.classList.remove("translate-x-[150%]");
+        setTimeout(() => {
+          toast.classList.add("translate-x-[150%]");
+        }, 2000);
+      }
+
+      function animateCartIcon() {
+        const container = document.getElementById("cart-icon-container");
+        container.classList.add("cart-animation-pop");
+        setTimeout(() => {
+          container.classList.remove("cart-animation-pop");
+        }, 300);
+      }
+    </script>
+  </body>
+</html>
